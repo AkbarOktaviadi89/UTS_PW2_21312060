@@ -83,8 +83,11 @@ class PeranController extends Controller
     public function edit($id)
     {
         $peran = Peran::where('id', $id)->first();
-        return view('peran.edit', compact('peran'));
+        $film = Film::all();
+        $cast = Cast::all();
+        return view('peran.edit', compact('peran', 'film', 'cast'));
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -103,8 +106,8 @@ class PeranController extends Controller
         ]);
 
         $peran = Peran::find($id);
-        $peran->film = $request->film;
-        $peran->cast = $request->cast;
+        $peran->film_id = $request->film_id;
+        $peran->cast_id = $request->cast_id;
         $peran->nama = $request->nama;
 
         $ubah = $peran->save();

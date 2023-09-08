@@ -11,17 +11,29 @@ Edit peran
     @method('PUT')
     <div class="form-group">
         <label>Film</label>
-        <input type="text" name="film" value="{{ $peran->film }}" class="form-control">
-        @error('film')
-            <div class="btn btn-danger">{{ $message }}</div>
+        <select name="film_id" class="form-control">
+            <option value="">Pilih Film</option>
+            @forelse($film as $key => $item)
+                <option value="{{ $item['id'] }}" @if($item['id'] == $peran->film_id) selected @endif>{{ $item['judul'] }}</option>
+            @empty
+            @endforelse
+        </select>
+        @error('film_id') <!-- Note the field name should match your validation rule, "film_id" instead of "film" -->
+        <div class="alert alert-danger">{{ $message }}</div>
         @enderror
     </div>
-    
+
     <div class="form-group">
         <label>Cast</label>
-        <input type="text" name="cast" value="{{ $peran->cast }}" class="form-control">
-        @error('cast')
-            <div class="btn btn-danger">{{ $message }}</div>
+        <select name="cast_id" class="form-control">
+            <option value="">Pilih Film</option>
+            @forelse($cast as $key => $item)
+                <option value="{{ $item['id'] }}" @if($item['id'] == $peran->cast_id) selected @endif>{{ $item['nama'] }}</option>
+            @empty
+            @endforelse
+        </select>
+        @error('cast_id') <!-- Note the field name should match your validation rule, "film_id" instead of "film" -->
+        <div class="alert alert-danger">{{ $message }}</div>
         @enderror
     </div>
 
@@ -30,14 +42,6 @@ Edit peran
         <input type="text" name="nama" value="{{ $peran->nama }}" class="form-control">
         @error('nama')
             <div class="btn btn-danger">{{ $message }}</div>
-        @enderror
-    </div>
-    
-    <div class="form-group">
-        <label>Genre_id</label>
-        <input type="number" name="genre_id" class="form-control" value="{{ $peran->genre_id}}">
-        @error('genre_id')
-            <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>
     
